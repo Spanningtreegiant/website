@@ -1,5 +1,11 @@
 <html>
 <head>
+
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+
 <style >
  @keyframes colorChange {
             0% { background-color: red; }
@@ -15,7 +21,7 @@ body{
             display: flex;
             justify-content: center; 
             align-items: center;
-			background-image:url("Ayy.gif");
+			background-image: url("images/Ayy.gif");
 			background-size:cover);
 			background-repeat:no-repeat);
 			animation: colorChange 10s infinite;
@@ -47,7 +53,7 @@ body{
 		
 		.mobile-only-button {
             display: none;
-			 position: fixed; 
+			position: fixed; 
             top: 0; 
             left: 0; 
             margin: 10px; 
@@ -91,11 +97,10 @@ body{
         }
 		
         window.onload = function() {
-            // Change color every 3 seconds
+            
             setInterval(changeColor, 3000); 
-
-            // Play audio in a loop
-            setInterval(GameLoop, 1000 / 10); // 10fps
+            
+            setInterval(GameLoop, 1000 / 10);
 
             let myAudio = new Audio();
             myAudio.src = 'bg.mp3';
