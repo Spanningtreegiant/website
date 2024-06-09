@@ -1,9 +1,54 @@
-<!DOCTYPE html>
 <html>
 <head>
-<title>Hello World HTML</title>
+<style >
+ @keyframes colorChange {
+            0% { background-color: red; }
+            25% { background-color: blue; }
+            50% { background-color: green; }
+            75% { background-color: yellow; }
+            100% { background-color: red; }
+        }		
+
+body{
+background-image:url("Ayy.gif");
+background-size:cover);
+background-repeat:no-repeat);
+   animation: colorChange 10s infinite;
+            margin: 0;
+            padding: 0;
+}
+
 </head>
+</style>
 <body>
-<h1>Hello World</h1>
-</body>
+ 
+   <script>
+        window.onload = function() {
+            // Change color every 3 seconds
+            setInterval(changeColor, 3000); 
+
+            // Play audio in a loop
+            setInterval(GameLoop, 1000 / 10); // 10fps
+
+            let myAudio = new Audio();
+            myAudio.src = 'bg.mp3';
+
+            function GameLoop() {
+                myAudio.play();
+                if (myAudio.paused) {
+                    myAudio.play();
+                }
+            }
+
+            const colors = ["red", "blue", "green", "yellow"];
+            let currentIndex = 0;
+
+            function changeColor() {
+                document.body.style.backgroundColor = colors[currentIndex];
+                currentIndex = (currentIndex + 1) % colors.length;
+            }
+        };
+    </script>
+ </body>
+
 </html>
