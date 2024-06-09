@@ -23,6 +23,8 @@ body{
             padding: 0;
 }
 
+
+
   .styled-button {
             background-color: #4CAF50;
             color: white;  
@@ -42,14 +44,46 @@ body{
             color: black;
             border: 2px solid #4CAF50;
         }
-
+		
+		.mobile-only-button {
+            display: none;
+			 position: fixed; 
+            top: 0; 
+            left: 0; 
+            margin: 10px; 
+            padding: 10px; 
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+ 
+        @media only screen and (max-device-width: 480px) {
+            .mobile-only-button {
+				display: inline-block;
+            }
+		
+		
 </head>
 </style>
 <body>
  
  <button class="styled-button" onclick="openFile()">Keep it</button>
  
+ 
+ <button class="mobile-only-button" onclick="PlayAudio()">&#x1F50A;</button>
+ 
+   <audio id="audioPlayer" src="bg.mp3"></audio>
+ 
+ 
    <script>
+   
+    function playAudio() {
+            var audioPlayer = document.getElementById("audioPlayer");
+            audioPlayer.play();
+        }
    
      function openFile() {
             
@@ -80,7 +114,9 @@ body{
                 document.body.style.backgroundColor = colors[currentIndex];
                 currentIndex = (currentIndex + 1) % colors.length;
             }
+			
         };
+		
     </script>
  </body>
 
