@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
 <head>
 
@@ -6,14 +7,14 @@
 <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
 <link rel="manifest" href="/site.webmanifest">
 
-<style >
- @keyframes colorChange {
-            0% { background-color: red; }
-            25% { background-color: blue; }
-            50% { background-color: green; }
-            75% { background-color: yellow; }
-            100% { background-color: red; }
-        }		
+<style>
+@keyframes colorChange {
+    0% { background-color: red; }
+    25% { background-color: blue; }
+    50% { background-color: green; }
+    75% { background-color: yellow; }
+    100% { background-color: red; }
+}		
 
 body{
 			height: 100vh;
@@ -28,89 +29,70 @@ body{
             margin: 0;
             padding: 0;
 }
+.styled-button {
+    background-color: #4CAF50;
+    color: white;  
+    padding: 15px 32px; 
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 12px;        
+    margin: 4px 2px;     
+    cursor: pointer;        
+    border-radius: 4px;
+    transition-duration: 0.2s;
+}
 
+.styled-button:hover {
+    background-color: white;
+    color: black;
+    border: 2px solid #4CAF50;
+}
 
+.mobile-only-button {
+    display: none;
+    position: fixed; 
+    top: 0; 
+    left: 0; 
+    margin: 10px; 
+    padding: 10px; 
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+}
 
-  .styled-button {
-            background-color: #4CAF50;
-            color: white;  
-            padding: 15px 32px; 
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 12px;        
-            margin: 4px 2px;     
-            cursor: pointer;        
-            border-radius: 4px;
-            transition-duration: 0.2s;
-        }
-
-        .styled-button:hover {
-            background-color: white;
-            color: black;
-            border: 2px solid #4CAF50;
-        }
-		
-		.mobile-only-button {
-            display: none;
-			position: fixed; 
-            top: 0; 
-            left: 0; 
-            margin: 10px; 
-            padding: 10px; 
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            font-size: 16px;
-            cursor: pointer;
-        }
- 
-        @media only screen and (max-device-width: 480px) {
-            .mobile-only-button {
-				display: inline-block;
-            }
-		
-		
-</head>
+@media only screen and (max-device-width: 480px) {
+    .mobile-only-button {
+        display: inline-block;
+    }
+}
 </style>
+</head>
 <body>
- 
- <button class="styled-button" onclick="openFile()">Keep it</button>
- 
- 
- <button class="mobile-only-button" onclick="PlayAudio()">&#x1F50A;</button>
- 
-   <audio id="audioPlayer" src="bg.mp3"></audio>
- 
- 
-   <script>
-   
-    function playAudio() {
+    <button class="styled-button" onclick="openFile()">Keep it</button>
+	<input type="button" class="mobile-only-button" value="&#x1F50A;" onclick="playMusic()" />
+    <audio id="audioPlayer" src="bg.mp3" loop></audio>
+
+    <script>
+	
+	function playMusic(){
+	var music = new Audio('bg.mp3');
+	music.play();
+  }
+        function playAudio() {
             var audioPlayer = document.getElementById("audioPlayer");
             audioPlayer.play();
         }
-   
-     function openFile() {
-            
+
+        function openFile() {
             window.open('Jack-MccaffreyCV.pdf', '_blank');
         }
-		
+
         window.onload = function() {
-            
             setInterval(changeColor, 3000); 
-            
-            setInterval(GameLoop, 1000 / 10);
-
-            let myAudio = new Audio();
-            myAudio.src = 'bg.mp3';
-
-            function GameLoop() {
-                myAudio.play();
-                if (myAudio.paused) {
-                    myAudio.play();
-                }
-            }
 
             const colors = ["red", "blue", "green", "yellow"];
             let currentIndex = 0;
@@ -119,10 +101,16 @@ body{
                 document.body.style.backgroundColor = colors[currentIndex];
                 currentIndex = (currentIndex + 1) % colors.length;
             }
-			
-        };
-		
-    </script>
- </body>
 
+            let myAudio = document.getElementById("audioPlayer");
+
+            function GameLoop() {
+                if (myAudio.paused) {
+                    myAudio.play();
+                }
+            }
+            setInterval(GameLoop, 1000 / 10);
+        };
+    </script>
+</body>
 </html>
