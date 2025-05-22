@@ -28,26 +28,6 @@ body {
     padding: 0;
 }
 
-.styled-button {
-    background-color: #4CAF50;
-    color: white;
-    padding: 15px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 12px;
-    margin: 4px 2px;
-    cursor: pointer;
-    border-radius: 4px;
-    transition-duration: 0.2s;
-}
-
-.styled-button:hover {
-    background-color: white;
-    color: black;
-    border: 2px solid #4CAF50;
-}
-
 .mobile-only-button {
     display: none;
     position: fixed;
@@ -71,34 +51,38 @@ body {
 </style>
 </head>
 <body>
-    <!-- Play button for mobile -->
-    <input type="button" class="mobile-only-button" value="🔊" onclick="playMusic()" />
+   
+    <input type="button" class="mobile-only-button" id="musicToggleBtn" value="🔊 Play Music" onclick="toggleMusic()" />
 
-    <!-- Audio element -->
     <audio id="audioPlayer" src="bg.mp3" loop></audio>
 
     <script>
     const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
     const audioPlayer = document.getElementById("audioPlayer");
+    const musicToggleBtn = document.getElementById("musicToggleBtn");
 
-    function playMusic() {
-        // Only allow one instance
+    function toggleMusic() {
         if (audioPlayer.paused) {
-            audioPlayer.play().catch(err => {
+            audioPlayer.play().then(() => {
+                musicToggleBtn.value = "⏸ Pause Music";
+            }).catch(err => {
                 console.warn("Playback failed:", err);
             });
+        } else {
+            audioPlayer.pause();
+            musicToggleBtn.value = "🔊 Play Music";
         }
     }
 
     window.onload = function () {
-        // Background color animation
+      
         setInterval(() => {
             const colors = ["red", "blue", "green", "yellow"];
             const currentIndex = Math.floor(Date.now() / 3000) % colors.length;
             document.body.style.backgroundColor = colors[currentIndex];
         }, 3000);
 
-        // Auto-play ONLY if not on mobile (desktop)
+      
         if (!isMobile) {
             audioPlayer.play().catch(() => {
                 console.log("Autoplay blocked by browser.");
