@@ -52,7 +52,7 @@ body {
 </style>
 </head>
 <body>
-    <input type="button" class="mobile-only-button" id="musicToggleBtn" value="🔊 Play Music" onclick="toggleMusic()" />
+    <input type="button" class="mobile-only-button" id="musicToggleBtn" value="🔊" onclick="toggleMusic()" />
 
     <audio id="audioPlayer" src="bg.mp3" loop></audio>
 
@@ -70,7 +70,7 @@ body {
             });
         } else {
             audioPlayer.pause();
-            musicToggleBtn.value = "🔊 Play Music";
+            musicToggleBtn.value = "🔊";
         }
     }
 
