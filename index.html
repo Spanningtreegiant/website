@@ -64,7 +64,7 @@ body{
     function toggleMusic() {
         if (audioPlayer.paused) {
             audioPlayer.play().then(() => {
-                musicToggleBtn.value = "⏸ Pause Music";
+                musicToggleBtn.value = "⏸";
             }).catch(err => {
                 console.warn("Playback failed:", err);
             });
