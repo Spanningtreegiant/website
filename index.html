@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-
 <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
@@ -14,31 +13,31 @@
     50% { background-color: green; }
     75% { background-color: yellow; }
     100% { background-color: red; }
-}		
-
-body{
-			height: 100vh;
-            margin: 0;
-            display: flex;
-            justify-content: center; 
-            align-items: center;
-			background-image: url("images/Ayy.gif");
-			background-size:cover);
-			background-repeat:no-repeat);
-			animation: colorChange 10s infinite;
-            margin: 0;
-            padding: 0;
 }
+
+body {
+    height: 100vh;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url("images/Ayy.gif");
+    background-size: cover;
+    background-repeat: no-repeat;
+    animation: colorChange 10s infinite;
+    padding: 0;
+}
+
 .styled-button {
     background-color: #4CAF50;
-    color: white;  
-    padding: 15px 32px; 
+    color: white;
+    padding: 15px 32px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    font-size: 12px;        
-    margin: 4px 2px;     
-    cursor: pointer;        
+    font-size: 12px;
+    margin: 4px 2px;
+    cursor: pointer;
     border-radius: 4px;
     transition-duration: 0.2s;
 }
@@ -51,11 +50,11 @@ body{
 
 .mobile-only-button {
     display: none;
-    position: fixed; 
-    top: 0; 
-    left: 0; 
-    margin: 10px; 
-    padding: 10px; 
+    position: fixed;
+    top: 0;
+    left: 0;
+    margin: 10px;
+    padding: 10px;
     background-color: #4CAF50;
     color: white;
     border: none;
@@ -72,44 +71,40 @@ body{
 </style>
 </head>
 <body>
-	<input type="button" class="mobile-only-button" value="&#x1F50A;" onclick="playMusic()" />
+    <!-- Play button for mobile -->
+    <input type="button" class="mobile-only-button" value="🔊" onclick="playMusic()" />
+
+    <!-- Audio element -->
     <audio id="audioPlayer" src="bg.mp3" loop></audio>
 
     <script>
-	
-	function playMusic(){
-	var music = new Audio('bg.mp3');
-	music.play();
-  }
-        function playAudio() {
-            var audioPlayer = document.getElementById("audioPlayer");
-            audioPlayer.play();
+    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+    const audioPlayer = document.getElementById("audioPlayer");
+
+    function playMusic() {
+        // Only allow one instance
+        if (audioPlayer.paused) {
+            audioPlayer.play().catch(err => {
+                console.warn("Playback failed:", err);
+            });
         }
+    }
 
-        function openFile() {
-            window.open('Jack-MccaffreyCV.pdf', '_blank');
-        }
-
-        window.onload = function() {
-            setInterval(changeColor, 3000); 
-
+    window.onload = function () {
+        // Background color animation
+        setInterval(() => {
             const colors = ["red", "blue", "green", "yellow"];
-            let currentIndex = 0;
+            const currentIndex = Math.floor(Date.now() / 3000) % colors.length;
+            document.body.style.backgroundColor = colors[currentIndex];
+        }, 3000);
 
-            function changeColor() {
-                document.body.style.backgroundColor = colors[currentIndex];
-                currentIndex = (currentIndex + 1) % colors.length;
-            }
-
-            let myAudio = document.getElementById("audioPlayer");
-
-            function GameLoop() {
-                if (myAudio.paused) {
-                    myAudio.play();
-                }
-            }
-            setInterval(GameLoop, 1000 / 10);
-        };
+        // Auto-play ONLY if not on mobile (desktop)
+        if (!isMobile) {
+            audioPlayer.play().catch(() => {
+                console.log("Autoplay blocked by browser.");
+            });
+        }
+    };
     </script>
 </body>
 </html>
