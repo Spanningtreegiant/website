@@ -24,6 +24,7 @@ body {
     background-image: url("images/Ayy.gif");
     background-size: cover;
     background-repeat: no-repeat;
+    background-position: center;
     animation: colorChange 10s infinite;
     padding: 0;
 }
@@ -51,7 +52,6 @@ body {
 </style>
 </head>
 <body>
-   
     <input type="button" class="mobile-only-button" id="musicToggleBtn" value="🔊 Play Music" onclick="toggleMusic()" />
 
     <audio id="audioPlayer" src="bg.mp3" loop></audio>
@@ -75,14 +75,12 @@ body {
     }
 
     window.onload = function () {
-      
         setInterval(() => {
             const colors = ["red", "blue", "green", "yellow"];
             const currentIndex = Math.floor(Date.now() / 3000) % colors.length;
             document.body.style.backgroundColor = colors[currentIndex];
         }, 3000);
 
-      
         if (!isMobile) {
             audioPlayer.play().catch(() => {
                 console.log("Autoplay blocked by browser.");
